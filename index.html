@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wymówki</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        .excuse-box {
+            text-align: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .excuse-box h1 {
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="excuse-box">
+        <h1 id="excuse"></h1>
+    </div>
+
+    <script>
+        // Lista wymówek
+        const excuses = [
+            "Mam już zaplanowane spotkanie rodzinne.",
+            "Przeziębiłem się i nie chcę nikogo zarazić.",
+            "Muszę zostać w domu z psem, bo nie czuję się dobrze.",
+            "Mam pilny projekt do ukończenia do poniedziałku.",
+            "Dostałem zaproszenie na inne urodziny.",
+            "Niestety, muszę pracować tego dnia.",
+            "Ktoś z rodziny ma urodziny tego samego dnia.",
+            "Zapisałem się na kurs, który odbywa się tego dnia.",
+            "Czeka mnie wizyta u lekarza.",
+            "Mam już bilety na koncert.",
+            "Auto jest w naprawie i nie mam jak dojechać.",
+            "Muszę pilnować dzieci, bo niania odwołała.",
+            "Planuję remont w mieszkaniu i ekipa przychodzi właśnie tego dnia.",
+            "Umówiłem się na ważne spotkanie biznesowe.",
+            "Muszę pomóc znajomemu w przeprowadzce.",
+            "Mam bilety na mecz, na który czekałem od miesięcy.",
+            "Mam zaplanowaną wycieczkę poza miasto.",
+            "Muszę odebrać kogoś z lotniska.",
+            "Złapałem wirusa i wolę nie narażać nikogo.",
+            "Przyjeżdżają do mnie dawno niewidziani krewni.",
+            "Właśnie przeprowadzam się i muszę pakować rzeczy.",
+            "Mój komputer się zepsuł i muszę go pilnie naprawić.",
+            "Uczestniczę w charytatywnym biegu.",
+            "Jestem zapisany na szkolenie, które trwa cały dzień.",
+            "Złamałem nogę i nie mogę się ruszać.",
+            "Jestem wyznaczony na dyżur w pracy.",
+            "Mam zaplanowaną wizytę u dentysty.",
+            "tego dnia odbywa się wesele w rodzinie.",
+            "Muszę pilnować dziecka znajomych, bo wyjeżdżają na weekend.",
+            "Moja siostra organizuje niespodziankę i muszę jej pomóc.",
+            "Planuję wolontariat w lokalnym schronisku.",
+            "Jestem na diecie i ciężko będzie mi się oprzeć pokusom.",
+            "Biorę udział w warsztatach kulinarnych.",
+            "Przyjeżdża do mnie znajomy z zagranicy.",
+            "Uczestniczę w maratonie filmowym.",
+            "Mam termin u fryzjera, na który długo czekałem.",
+            "Muszę zrobić zakupy, bo w niedzielę sklepy są zamknięte.",
+            "Mam zaplanowane badania kontrolne.",
+            "Muszę pomóc rodzicom w remoncie.",
+            "Mam egzaminy w nadchodzącym tygodniu i muszę się przygotować.",
+            "Biorę udział w konferencji online.",
+            "Zamierzam odpocząć po trudnym tygodniu.",
+            "Obiecałem komuś, że pomogę mu tego dnia.",
+            "Mam termin na masaż, na który czekałem od dawna.",
+            "Chcę spędzić czas z moim partnerem/partnerką, bo dawno nie mieliśmy wolnego dnia razem.",
+            "Muszę zająć się domowymi obowiązkami, które odkładałem cały tydzień.",
+            "Ktoś z rodziny ma kryzys i potrzebuje mojego wsparcia.",
+            "Jestem odpowiedzialny za dostarczenie ważnych dokumentów.",
+            "Muszę zorganizować spotkanie z ważnym klientem.",
+            "Potrzebuję dnia dla siebie, aby się zregenerować po stresującym tygodniu.",
+            'Mam wizytę kontrolną u fizjoterapeuty.',
+            'Muszę zostać w domu, czekam na kuriera z ważną przesyłką.',
+            'Zobowiązałem się pomóc sąsiadowi w naprawie samochodu.',
+            'Przyjeżdża do mnie technik, żeby naprawić pralkę.',
+            'Mam zaległości w pracy i muszę je nadrobić w weekend.',
+            'Organizuję spotkanie online ze znajomymi, którzy mieszkają za granicą.',
+            'Wziąłem na siebie odpowiedzialność za organizację zbiórki charytatywnej.',
+            'Zaplanowałem ważną rozmowę telefoniczną z rodziną.',
+            'Zostałem zaproszony na wycieczkę w góry.',
+            'Mam do załatwienia sprawy urzędowe.',
+            'Muszę zawieźć samochód na przegląd techniczny.',
+            'Dziecko ma występ w szkole i muszę się tam pojawić.',
+            'Potrzebuję wolnego dnia, żeby odpocząć po intensywnym tygodniu.',
+            'Czeka mnie ważny egzamin i muszę się do niego przygotować.',
+            'Zobowiązałem się do opieki nad zwierzęciem znajomego.',
+            'Otrzymałem pilne zadanie z pracy, które muszę wykonać w weekend.',
+            'Uczestniczę w wydarzeniu online, które odbywa się w tym samym czasie.',
+            'Zostałem zaproszony na urodziny kogoś z rodziny.',
+            'Mój partner/partnerka zaplanował/a niespodziankę, o której nie wiedziałem.',
+            'Pomagam w organizacji lokalnej imprezy.',
+            'Zostałem poproszony o pomoc w przygotowaniu konferencji.',
+            'Moje dziecko jest chore i muszę zostać w domu.',
+            'Znalazłem okazyjny bilet na lot i wyjeżdżam na weekend.',
+            'Mam zaplanowaną wizytę kontrolną u lekarza.',
+            'Otrzymałem zaproszenie na warsztaty rozwojowe.',
+            'Zostałem wolontariuszem w lokalnym schronisku na weekend.',
+            'Wziąłem na siebie odpowiedzialność za zorganizowanie imprezy rodzinnej.',
+            'Mam trening przygotowujący mnie do maratonu.',
+            'Oczekuję ważnego telefonu, na który muszę być dostępny.',
+            'Mam do załatwienia formalności związane z ubezpieczeniem.',
+            'Przyjeżdża do mnie znajomy, który potrzebuje wsparcia.',
+            'Zobowiązałem się pomóc w organizacji targów.',
+            'Jestem członkiem jury w lokalnym konkursie.',
+            'Biorę udział w kursie weekendowym.',
+            'Dostałem niespodziewane zaproszenie na ślub.',
+            'Oczekuję wizyty serwisanta w sprawie naprawy lodówki.',
+            'Przyjeżdżają do mnie rodzice i muszę się nimi zająć.',
+            'Mam do odebrania ważne dokumenty, które mogą być wydane tylko tego dnia.',
+            'Organizuję prywatne przyjęcie w domu i muszę je przygotować.',
+            'Zobowiązałem się wziąć udział w akcji sadzenia drzew.',
+            'Mam spotkanie z doradcą finansowym.',
+            'Wziąłem na siebie opiekę nad zwierzętami sąsiada, który wyjechał na weekend.',
+            'Biorę udział w lokalnym turnieju sportowym.',
+            'Dostałem zaproszenie na imprezę integracyjną z pracy.',
+            'Mam termin spotkania z architektem w sprawie remontu domu.',
+            'Uczestniczę w zlocie fanów mojej ulubionej gry.',
+            'Zostałem poproszony o przeprowadzenie prezentacji online.',
+            'Muszę pomóc bratu/siostrze w przeprowadzce.',
+            'Planuję ważne spotkanie z klientem.',
+            'Przyjeżdża do mnie osoba, której dawno nie widziałem, i muszę spędzić z nią czas.',
+        ];
+
+        // Funkcja losująca wymówkę
+        function getRandomExcuse() {
+            const randomIndex = Math.floor(Math.random() * excuses.length);
+            return excuses[randomIndex];
+        }
+
+        // Wyświetlanie losowej wymówki
+        document.getElementById('excuse').innerText = getRandomExcuse();
+    </script>
+
+</body>
+</html>
